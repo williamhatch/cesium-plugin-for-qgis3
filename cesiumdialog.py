@@ -20,14 +20,14 @@
  ***************************************************************************/
 """
 
-from PyQt4 import QtCore, QtGui
-from ui_cesium import Ui_cesium
+from PyQt5 import QtCore, QtGui
+from .ui_cesium import Ui_cesium
 # create the dialog for zoom to point
+from PyQt5.QtWidgets import QDialog
 
-
-class cesiumDialog(QtGui.QDialog, Ui_cesium):
+class cesiumDialog(QDialog, Ui_cesium):
     def __init__(self):
-        QtGui.QDialog.__init__(self)
+        QDialog.__init__(self)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see

@@ -20,16 +20,22 @@
  ***************************************************************************/
 """
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from qgis.core import *
+try:
+    from PyQt5.QtCore import *
+    from PyQt5.QtGui import *
+    from PyQt5.QtWidgets import *
+
+except ImportError:
+    from PyQt4.QtCore import *
+    from PyQt4.QtGui import *
 # Initialize Qt resources from file resources.py
-import resources_rc
+# import .resources_rc
 # Import the code for the dialog
-from cesiumdialog import cesiumDialog
+from .cesiumdialog import cesiumDialog
 import os.path
 
 import qgis
+from qgis.core import QgsApplication
 import codecs
 
 import webbrowser
@@ -76,273 +82,261 @@ class cesium:
     # run method that performs all the real work
     def run(self):
 
-				tempdir = unicode(QFileInfo(QgsApplication.qgisUserDbFilePath()).path()) + "/python/plugins/cesium/_WebServer/temp"
-				
+        tempdir = unicode(
+            QFileInfo(QgsApplication.qgisUserDatabaseFilePath()).path()) + "/python/plugins/cesium/_WebServer/temp"
 
-#  Adesso scrivo il vettoriale
-#  Prendo il sistema di riferimento del Layer selezionato ------------------
-        
-        
-				layer = self.iface.mapCanvas().currentLayer()
-				if layer:
-				  if layer.type() == layer.VectorLayer:				
+        #  Adesso scrivo il vettoriale
+        #  Prendo il sistema di riferimento del Layer selezionato ------------------
 
-				    name = layer.source();
-				    nomeLayer = layer.name()
-				    nomeLay   = nomeLayer.replace(" ","_")
+        layer = self.iface.mapCanvas().currentLayer()
+        if layer:
+            if layer.type() == layer.VectorLayer:
 
-				    numFeatures = layer.featureCount()
-				    print ("numFeatures %d") %(numFeatures)
-    				          
-      				    
-				    crsSrc = layer.crs();
+                name = layer.source();
+                nomeLayer = layer.name()
+                nomeLay = nomeLayer.replace(" ", "_")
 
-				    crsDest = QgsCoordinateReferenceSystem(4326)  # Wgs84LLH
-				    xform = QgsCoordinateTransform(crsSrc, crsDest)
+                numFeatures = layer.featureCount()
+                print("numFeatures %d") % (numFeatures)
 
-#----------------------------------------------------------------------------
-#  Trasformo la finestra video in coordinate layer, 
-#     per estrarre solo gli elementi visibili
-#----------------------------------------------------------------------------
-				    iface = qgis.utils.iface
-				    
-				    boundBox = iface.mapCanvas().extent() 
-                
-				    xMin = float(boundBox.xMinimum())
-				    yMin = float(boundBox.yMinimum())
+                crsSrc = layer.crs();
 
-				    xMax = float(boundBox.xMaximum())                
-				    yMax = float(boundBox.yMaximum())
-				    
-				    
-				    crs2 = self.iface.mapCanvas().mapRenderer().destinationCrs()
-				    crsSrc2  = QgsCoordinateReferenceSystem(crs2.authid())   
-				    crsDest2 = QgsCoordinateReferenceSystem(layer.crs())   
-				    xform2   = QgsCoordinateTransform(crsSrc2, crsDest2)
-                              
-				    pt0 = xform2.transform(QgsPoint(xMin, yMin))
-				    pt1 = xform2.transform(QgsPoint(xMax, yMax))
-				    
-				    rect = QgsRectangle(pt0, pt1)
-				    
-#----------------------------------------------------------------------------
+                crsDest = QgsCoordinateReferenceSystem(4326)  # Wgs84LLH
+                xform = QgsCoordinateTransform(crsSrc, crsDest)
 
-				    rq = QgsFeatureRequest(rect)
+                # ----------------------------------------------------------------------------
+                #  Trasformo la finestra video in coordinate layer,
+                #     per estrarre solo gli elementi visibili
+                # ----------------------------------------------------------------------------
+                iface = qgis.utils.iface
 
-				    iter = layer.getFeatures(rq)
-            
-#  CONTEGGIO gli elementi da esportare -----------------------
+                boundBox = iface.mapCanvas().extent()
 
-				    nele = 0
-				    for feat in iter:
-				        nele = nele + 1
+                xMin = float(boundBox.xMinimum())
+                yMin = float(boundBox.yMinimum())
 
-#  RICARICO la geometria ---------------------------------------		    
-				    iter = layer.getFeatures(rq)
+                xMax = float(boundBox.xMaximum())
+                yMax = float(boundBox.yMaximum())
 
-# ---------------------------------------------------------------------------
-#    INIZIO scrittura  geoJSON 
-# ---------------------------------------------------------------------------
+                crs2 = self.iface.mapCanvas().mapRenderer().destinationCrs()
+                crsSrc2 = QgsCoordinateReferenceSystem(crs2.authid())
+                crsDest2 = QgsCoordinateReferenceSystem(layer.crs())
+                xform2 = QgsCoordinateTransform(crsSrc2, crsDest2)
 
-				    out_folder = tempdir
-				
-				    kml = codecs.open(out_folder + '/CesiumDoc.geojson', 'w', encoding='utf-8')
+                pt0 = xform2.transform(QgsPoint(xMin, yMin))
+                pt1 = xform2.transform(QgsPoint(xMax, yMax))
 
-				    #Write the geoJson header
+                rect = QgsRectangle(pt0, pt1)
 
-				    kml.write('{\n')
-				    kml.write('"type": "FeatureCollection",\n')
-				    kml.write('"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },\n') 
-				    kml.write('\n')
+                # ----------------------------------------------------------------------------
 
-				    kml.write('"features": [')
-				    
-				    numE = 0
-				    for feat in iter:
+                rq = QgsFeatureRequest(rect)
 
-				        numE = numE + 1
-                				        		      
-				        # Leggo la geometria dell'elemento
-				      
-				        geom = feat.geometry()
-				      
-				        kml.write ('\n{ "type": "Feature", ')
-                 
-# DESCRIPTION DATA-----------
-				        			        
-				        kml.write ('"properties": {')
+                iter = layer.getFeatures(rq)
 
- 
- # Prendo il contenuto dei campi -------------
-				        fff = feat.fields()
-				        num = fff.count()
-				        print num
-				        iii = -1
-				        for f in layer.pendingFields(): 				        
-				           iii = iii + 1			           
-				           stringazza = (' "%s": "%s"') %(f.name(),feat[iii]) # QUA c'è una virgola di troppo
-				           kml.write (stringazza)
-				           if(iii < num-1):
-				              kml.write (',')
-				        kml.write (' }, ')
+                #  CONTEGGIO gli elementi da esportare -----------------------
 
-#  Scrivo la geometria dell'elemento corrente ------------
-				        kml.write ('"geometry": ')		        
-				        stringazza =  geom.exportToGeoJSON()
-				        kml.write (stringazza)
-				        
-				        kml.write (' } ')
+                nele = 0
+                for feat in iter:
+                    nele = nele + 1
 
-				        if (numE < nele):
-				              kml.write (',')
+                #  RICARICO la geometria ---------------------------------------
+                iter = layer.getFeatures(rq)
 
-				        
-				    #----- Fine Ciclo Elementi da esportare
-				    
+                # ---------------------------------------------------------------------------
+                #    INIZIO scrittura  geoJSON
+                # ---------------------------------------------------------------------------
 
-				    kml.write (']\n')
-				    kml.write ('}\n')
+                out_folder = tempdir
 
-				    kml.close()
-# ---------------------------------------------------------------------------				
-#    FINE scrittura  geoJSON 
-# ---------------------------------------------------------------------------
+                kml = codecs.open(out_folder + '/CesiumDoc.geojson', 'w', encoding='utf-8')
 
+                # Write the geoJson header
 
-# ---------------------------------------------------------------------------				
-#    INIZIO scrittura  czml 
-# ---------------------------------------------------------------------------
+                kml.write('{\n')
+                kml.write('"type": "FeatureCollection",\n')
+                kml.write('"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },\n')
+                kml.write('\n')
 
+                kml.write('"features": [')
 
-#  Adesso scrivo il vettoriale
-#  Prendo il sistema di riferimento del Layer selezionato ------------------
-        
-        
-				layer = self.iface.mapCanvas().currentLayer()
-				if layer:
-				  if layer.type() == layer.VectorLayer:				
+                numE = 0
+                for feat in iter:
 
-				    out_folder = tempdir
-				
-				    kml = codecs.open(out_folder + '/CesiumDoc.czml', 'w', encoding='utf-8')
+                    numE = numE + 1
 
-				    #Write the czml header
+                    # Leggo la geometria dell'elemento
 
-				    kml.write('[{\n')
-				    kml.write('        "id" : "document",\n')
-				    kml.write('        "version" : "1.0"\n')
-				    kml.write('    }, {\n\n')
+                    geom = feat.geometry()
 
-				    rq = QgsFeatureRequest(rect)
+                    kml.write('\n{ "type": "Feature", ')
 
-				    iter = layer.getFeatures(rq)
-            
-#  CICLO per ogni elemento da esportare -----------------------
-				    
-				    for feat in iter:
-				    
-				      nele = feat.id()
-              				      
-				      # fetch geometry
-				      geom = feat.geometry()
-				       # show some information about the feature
-				      
-				      if geom.type() == QGis.Point:
+                    # DESCRIPTION DATA-----------
 
-				        kml.write ('    "point":{	\n')			        
+                    kml.write('"properties": {')
+
+                    # Prendo il contenuto dei campi -------------
+                    fff = feat.fields()
+                    num = fff.count()
+                    print
+                    num
+                    iii = -1
+                    for f in layer.pendingFields():
+                        iii = iii + 1
+                        stringazza = (' "%s": "%s"') % (f.name(), feat[iii])  # QUA c'ï¿½ una virgola di troppo
+                        kml.write(stringazza)
+                        if (iii < num - 1):
+                            kml.write(',')
+                    kml.write(' }, ')
+
+                    #  Scrivo la geometria dell'elemento corrente ------------
+                    kml.write('"geometry": ')
+                    stringazza = geom.exportToGeoJSON()
+                    kml.write(stringazza)
+
+                    kml.write(' } ')
+
+                    if (numE < nele):
+                        kml.write(',')
+
+                # ----- Fine Ciclo Elementi da esportare
+
+                kml.write(']\n')
+                kml.write('}\n')
+
+                kml.close()
+        # ---------------------------------------------------------------------------
+        #    FINE scrittura  geoJSON
+        # ---------------------------------------------------------------------------
+
+        # ---------------------------------------------------------------------------
+        #    INIZIO scrittura  czml
+        # ---------------------------------------------------------------------------
+
+        #  Adesso scrivo il vettoriale
+        #  Prendo il sistema di riferimento del Layer selezionato ------------------
+
+        layer = self.iface.mapCanvas().currentLayer()
+        if layer:
+            if layer.type() == layer.VectorLayer:
+
+                out_folder = tempdir
+
+                kml = codecs.open(out_folder + '/CesiumDoc.czml', 'w', encoding='utf-8')
+
+                # Write the czml header
+
+                kml.write('[{\n')
+                kml.write('        "id" : "document",\n')
+                kml.write('        "version" : "1.0"\n')
+                kml.write('    }, {\n\n')
+
+                rq = QgsFeatureRequest(rect)
+
+                iter = layer.getFeatures(rq)
+
+                #  CICLO per ogni elemento da esportare -----------------------
+
+                for feat in iter:
+
+                    nele = feat.id()
+
+                    # fetch geometry
+                    geom = feat.geometry()
+                    # show some information about the feature
+
+                    if geom.type() == QGis.Point:
+
+                        kml.write('    "point":{	\n')
 
 
-				      elif geom.type() == QGis.Line:
+                    elif geom.type() == QGis.Line:
 
-				        kml.write ('    "line":{\n')
+                        kml.write('    "line":{\n')
 
 
 
-				      elif geom.type() == QGis.Polygon:
+                    elif geom.type() == QGis.Polygon:
 
-				        kml.write ('    "polygon":{\n')
-				        kml.write ('      "positions":{\n')
-				        kml.write ('        "cartographicDegrees":[\n          ')
-				        
-				        elem = geom.asPolygon()
+                        kml.write('    "polygon":{\n')
+                        kml.write('      "positions":{\n')
+                        kml.write('        "cartographicDegrees":[\n          ')
 
-				        for iii in range (len(elem)):
+                        elem = geom.asPolygon()
 
-#				          if (iii == 1):				          
-#				            kml.write ('         </coordinates>\n')
-#				            kml.write ('         </LinearRing>\n')
-#				            kml.write ('         </outerBoundaryIs>\n')
-#				            kml.write ('         <innerBoundaryIs>\n')
-#				            kml.write ('         <LinearRing>\n')
-#				            kml.write ('         <coordinates>\n')
-#
-#				          if (iii > 1):				          
-#				            kml.write ('         </coordinates>\n')
-#				            kml.write ('         </LinearRing>\n')
-#				            kml.write ('         </innerBoundaryIs>\n')
-#				            kml.write ('         <innerBoundaryIs>\n')
-#				            kml.write ('         <LinearRing>\n')
-#				            kml.write ('         <coordinates>\n')
-	
-				          npunti = len(elem[iii])
+                        for iii in range(len(elem)):
 
-				          np = -1
-				          
-				          for jjj in range (len(elem[iii])):
-				                         
-				            x1,y1 = elem[iii][jjj][0], elem[iii][jjj][1]
-				            
-				            pt1 = xform.transform(QgsPoint(x1, y1))
-                           
-				            stringazza =   ('%.9lf,%.9lf,0') % (pt1.x(), pt1.y())
-				            kml.write (stringazza)
-				            
-				            np = np + 1
-				            
-				            if (np < npunti-1):
-				              kml.write (',')				            
+                            #				          if (iii == 1):
+                            #				            kml.write ('         </coordinates>\n')
+                            #				            kml.write ('         </LinearRing>\n')
+                            #				            kml.write ('         </outerBoundaryIs>\n')
+                            #				            kml.write ('         <innerBoundaryIs>\n')
+                            #				            kml.write ('         <LinearRing>\n')
+                            #				            kml.write ('         <coordinates>\n')
+                            #
+                            #				          if (iii > 1):
+                            #				            kml.write ('         </coordinates>\n')
+                            #				            kml.write ('         </LinearRing>\n')
+                            #				            kml.write ('         </innerBoundaryIs>\n')
+                            #				            kml.write ('         <innerBoundaryIs>\n')
+                            #				            kml.write ('         <LinearRing>\n')
+                            #				            kml.write ('         <coordinates>\n')
 
-#				        if (iii == 0):
-#				           kml.write ('         </coordinates>\n')
-#				           kml.write ('        </LinearRing>\n')
-#				           kml.write ('     </outerBoundaryIs>\n')
-#				           kml.write ('   </Polygon>\n')
-#
-#				        if (iii > 0):
-#				           kml.write ('         </coordinates>\n')
-#				           kml.write ('        </LinearRing>\n')
-#				           kml.write ('     </innerBoundaryIs>\n')
-#				           kml.write ('   </Polygon>\n')
-	
-				        kml.write ('\n        ]\n')
+                            npunti = len(elem[iii])
 
-				        kml.write ('      },\n')
-				        kml.write ('      "material":{\n')
-				        kml.write ('        "solidColor":{\n')
-				        kml.write ('          "color":{\n')
-				        kml.write ('            "rgba":[\n')
-				        kml.write ('              255,0,0,77\n')
-				        kml.write ('            ]\n')
-				        kml.write ('          }\n')
-				        kml.write ('        }\n')
-				        kml.write ('      },\n')
-				        kml.write ('      "fill":true,\n')
-				        kml.write ('      "outline":true,\n')
-				        kml.write ('      "outlineColor":{\n')
-				        kml.write ('        "rgba":[\n')
-				        kml.write ('          255,0,0,255\n')
-				        kml.write ('        ]\n')
-				        kml.write ('      }\n')
-				        kml.write ('    }\n')
-				        
-				    #----- Fine Ciclo Elementi da esportare
-				    
+                            np = -1
 
-				    kml.write ('  }]\n')
+                            for jjj in range(len(elem[iii])):
 
-				    kml.close()
+                                x1, y1 = elem[iii][jjj][0], elem[iii][jjj][1]
 
+                                pt1 = xform.transform(QgsPoint(x1, y1))
 
+                                stringazza = ('%.9lf,%.9lf,0') % (pt1.x(), pt1.y())
+                                kml.write(stringazza)
 
+                                np = np + 1
 
-				webbrowser.open_new("http://localhost:8000")
+                                if (np < npunti - 1):
+                                    kml.write(',')
+
+                                #				        if (iii == 0):
+                        #				           kml.write ('         </coordinates>\n')
+                        #				           kml.write ('        </LinearRing>\n')
+                        #				           kml.write ('     </outerBoundaryIs>\n')
+                        #				           kml.write ('   </Polygon>\n')
+                        #
+                        #				        if (iii > 0):
+                        #				           kml.write ('         </coordinates>\n')
+                        #				           kml.write ('        </LinearRing>\n')
+                        #				           kml.write ('     </innerBoundaryIs>\n')
+                        #				           kml.write ('   </Polygon>\n')
+
+                        kml.write('\n        ]\n')
+
+                        kml.write('      },\n')
+                        kml.write('      "material":{\n')
+                        kml.write('        "solidColor":{\n')
+                        kml.write('          "color":{\n')
+                        kml.write('            "rgba":[\n')
+                        kml.write('              255,0,0,77\n')
+                        kml.write('            ]\n')
+                        kml.write('          }\n')
+                        kml.write('        }\n')
+                        kml.write('      },\n')
+                        kml.write('      "fill":true,\n')
+                        kml.write('      "outline":true,\n')
+                        kml.write('      "outlineColor":{\n')
+                        kml.write('        "rgba":[\n')
+                        kml.write('          255,0,0,255\n')
+                        kml.write('        ]\n')
+                        kml.write('      }\n')
+                        kml.write('    }\n')
+
+                    # ----- Fine Ciclo Elementi da esportare
+
+                kml.write('  }]\n')
+
+                kml.close()
+
+        webbrowser.open_new("http://localhost:8001")

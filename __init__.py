@@ -23,5 +23,5 @@
 
 def classFactory(iface):
     # load cesium class from file cesium
-    from cesium import cesium
+    from .cesium import cesium
     return cesium(iface)
