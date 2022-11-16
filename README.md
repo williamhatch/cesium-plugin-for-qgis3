@@ -13,4 +13,5 @@ Installation and test
 3. Enable the cesium plugin from the plugin menu. (Just make sure cesium is checked)
 4. Click from the menu: Plugins -> cesium -> cesium, it will auto open the browser.
 
+
 (Change the default access token for cesium which can be applied from cesium official website)
