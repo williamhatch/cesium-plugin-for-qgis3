@@ -1,0 +1,4 @@
+rem python -m SimpleHTTPServer
+rem python -m CGIHTTPServer 8000
+rem python -m http.server --cgi 8000
+npx http-server -p . 8000
