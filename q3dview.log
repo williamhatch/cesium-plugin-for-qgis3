@@ -1,0 +1,85 @@
+2022-12-06 15:20:02 runScript: app.resume()
+2022-12-06 15:20:02 ReferenceError: Can't find variable: app (undefined: 1)
+2022-12-06 15:20:03 runScript: init(false, 2)
+2022-12-06 15:20:03 THREE.WebGLRenderer: ANGLE_instanced_arrays extension not supported. (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/threejs/three.min.js: 42)
+2022-12-06 15:20:03 test infi .... error (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 284)
+2022-12-06 15:20:03 THREE.WebGLRenderer: ANGLE_instanced_arrays extension not supported. (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/threejs/three.min.js: 42)
+2022-12-06 15:20:03 [object Object] (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 369)
+2022-12-06 15:20:03 runScript: app.start()
+2022-12-06 15:20:03 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'scene\', \'properties\': {\'baseExtent\': {\'cx\': 113.72514972569044, \'cy\': 22.996534474393187, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'rotation\': 0}, \'origin\': {\'x\': 113.72514972569044, \'y\': 22.996534474393187, \'z\': 0.0}, \'zScale\': 1.0, \'light\': \'directional\'}}';
+2022-12-06 15:20:03 runScript: setOutlineEffectEnabled(false)
+2022-12-06 15:20:03 runScript: setBackgroundColor(0, 0)
+2022-12-06 15:20:03 runScript: Q3D.Config.coord.visible = true;
+2022-12-06 15:20:03 runScript: Q3D.Config.coord.latlon = false;
+2022-12-06 15:20:03 runScript: loadStart("LYRS", true)
+2022-12-06 15:20:03 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'layer\', \'id\': 2, \'properties\': {\'name\': \'Flat Plane\', \'clickable\': True, \'visible\': True, \'type\': \'dem\', \'clipped\': False, \'mtlNames\': [\'map (canvas)\'], \'mtlIdx\': 0}, \'data\': [], \'PROPERTIES\': {\'checkBox_Clickable\': True, \'checkBox_Frame\': False, \'checkBox_Sides\': False, \'checkBox_Tiles\': False, \'checkBox_Visible\': True, \'checkBox_Wireframe\': False, \'colorButton_Edge\': [0, 0, 0, 255], \'colorButton_Side\': [204, 187, 170, 255], \'colorButton_Wireframe\': [0, 0, 0, 255], \'lineEdit_Altitude\'';
+2022-12-06 15:20:03 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x00000284425569E0>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 15:20:03 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'translate\': [0.0, 0.0, 0], \'zScale\': 1.0, \'grid\': {\'width\': 2, \'height\': 2, \'binary\': PyQt5.QtCore.QByteArray(b\'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\')}}';
+2022-12-06 15:20:03 runScript: loadEnd("LYRS")
+2022-12-06 15:59:29 An error occurred while rendering.  Rendering has stopped.
+TypeError: undefined is not an object (evaluating 'e.longitude')
+project@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:25425
+wgs84To2DModelMatrix@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:216424
+updateNodeHierarchyModelMatrix@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1508104
+update@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1528839
+update@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1540741
+updateContent@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1874887
+update@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1876872
+updateTiles@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1904260
+update$1@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1907254
+updateForPass@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1908305
+update@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:1907557
+update@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:2071213
+updateAndRenderPrimitives@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3094122
+executeCommandsInViewport@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3092695
+updateAndExecuteCommands@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3090026
+render@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3102565
+tryAndCatchError@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3102779
+render@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3104652
+render@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3357100
+e@file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js:1:3342979 (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Cesium/Cesium.js: 1)
+2022-12-06 15:59:43 runScript: init(false, 2)
+2022-12-06 15:59:43 THREE.WebGLRenderer: ANGLE_instanced_arrays extension not supported. (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/threejs/three.min.js: 42)
+2022-12-06 15:59:43 test infi .... error (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 284)
+2022-12-06 15:59:43 THREE.WebGLRenderer: ANGLE_instanced_arrays extension not supported. (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/threejs/three.min.js: 42)
+2022-12-06 15:59:43 [object Object] (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 369)
+2022-12-06 15:59:43 runScript: app.start()
+2022-12-06 15:59:43 runScript: init(false, 2)
+2022-12-06 15:59:43 THREE.WebGLRenderer: ANGLE_instanced_arrays extension not supported. (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/threejs/three.min.js: 42)
+2022-12-06 15:59:43 test infi .... error (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 284)
+2022-12-06 15:59:43 [object Object] (file:///C:/Users/willi/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/Qgis2threejs/js/Qgis2threejs.js: 369)
+2022-12-06 15:59:43 runScript: app.start()
+2022-12-06 15:59:43 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'scene\', \'properties\': {\'baseExtent\': {\'cx\': 113.72514972569044, \'cy\': 22.996534474393187, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'rotation\': 0}, \'origin\': {\'x\': 113.72514972569044, \'y\': 22.996534474393187, \'z\': 0.0}, \'zScale\': 1.0, \'light\': \'directional\'}}';
+2022-12-06 15:59:43 runScript: setOutlineEffectEnabled(false)
+2022-12-06 15:59:43 runScript: setBackgroundColor(0, 0)
+2022-12-06 15:59:43 runScript: Q3D.Config.coord.visible = true;
+2022-12-06 15:59:43 runScript: Q3D.Config.coord.latlon = false;
+2022-12-06 15:59:43 runScript: loadStart("LYRS", true)
+2022-12-06 15:59:43 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'layer\', \'id\': 2, \'properties\': {\'name\': \'Flat Plane\', \'clickable\': True, \'visible\': True, \'type\': \'dem\', \'clipped\': False, \'mtlNames\': [\'map (canvas)\'], \'mtlIdx\': 0}, \'data\': [], \'PROPERTIES\': {\'checkBox_Clickable\': True, \'checkBox_Frame\': False, \'checkBox_Sides\': False, \'checkBox_Tiles\': False, \'checkBox_Visible\': True, \'checkBox_Wireframe\': False, \'colorButton_Edge\': [0, 0, 0, 255], \'colorButton_Side\': [204, 187, 170, 255], \'colorButton_Wireframe\': [0, 0, 0, 255], \'lineEdit_Altitude\'';
+2022-12-06 15:59:44 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x0000028442556900>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 15:59:44 runScript: loadEnd("LYRS")
+2022-12-06 15:59:44 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'scene\', \'properties\': {\'baseExtent\': {\'cx\': 113.72514972569044, \'cy\': 22.996534474393187, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'rotation\': 0}, \'origin\': {\'x\': 113.72514972569044, \'y\': 22.996534474393187, \'z\': 0.0}, \'zScale\': 1.0, \'light\': \'directional\'}}';
+2022-12-06 15:59:44 runScript: setOutlineEffectEnabled(false)
+2022-12-06 15:59:44 runScript: setBackgroundColor(0, 0)
+2022-12-06 15:59:44 runScript: Q3D.Config.coord.visible = true;
+2022-12-06 15:59:44 runScript: Q3D.Config.coord.latlon = false;
+2022-12-06 15:59:44 runScript: loadStart("LYRS", true)
+2022-12-06 15:59:44 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'layer\', \'id\': 2, \'properties\': {\'name\': \'Flat Plane\', \'clickable\': True, \'visible\': True, \'type\': \'dem\', \'clipped\': False, \'mtlNames\': [\'map (canvas)\'], \'mtlIdx\': 0}, \'data\': [], \'PROPERTIES\': {\'checkBox_Clickable\': True, \'checkBox_Frame\': False, \'checkBox_Sides\': False, \'checkBox_Tiles\': False, \'checkBox_Visible\': True, \'checkBox_Wireframe\': False, \'colorButton_Edge\': [0, 0, 0, 255], \'colorButton_Side\': [204, 187, 170, 255], \'colorButton_Wireframe\': [0, 0, 0, 255], \'lineEdit_Altitude\'';
+2022-12-06 15:59:44 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x0000028442556A50>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 15:59:44 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'translate\': [0.0, 0.0, 0], \'zScale\': 1.0, \'grid\': {\'width\': 2, \'height\': 2, \'binary\': PyQt5.QtCore.QByteArray(b\'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\')}}';
+2022-12-06 15:59:44 runScript: loadEnd("LYRS")
+2022-12-06 16:03:56 runScript: app.resume()
+2022-12-06 16:12:37 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x0000028442556B30>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 16:12:37 runScript: adjustCameraPos()
+2022-12-06 17:27:31 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'scene\', \'properties\': {\'baseExtent\': {\'cx\': 113.72514972569044, \'cy\': 22.996534474393187, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'rotation\': 0}, \'origin\': {\'x\': 113.72514972569044, \'y\': 22.996534474393187, \'z\': 0.0}, \'zScale\': 1.0, \'light\': \'directional\'}}';
+2022-12-06 17:27:31 runScript: loadStart("LYRS", true)
+2022-12-06 17:27:31 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'layer\', \'id\': 2, \'properties\': {\'name\': \'Flat Plane\', \'clickable\': True, \'visible\': True, \'type\': \'dem\', \'clipped\': False, \'mtlNames\': [\'map (canvas)\'], \'mtlIdx\': 0}, \'data\': [], \'PROPERTIES\': {\'checkBox_Clickable\': True, \'checkBox_Frame\': False, \'checkBox_Sides\': False, \'checkBox_Tiles\': False, \'checkBox_Visible\': True, \'checkBox_Wireframe\': False, \'colorButton_Edge\': [0, 0, 0, 255], \'colorButton_Side\': [204, 187, 170, 255], \'colorButton_Wireframe\': [0, 0, 0, 255], \'lineEdit_Altitude\'';
+2022-12-06 17:27:32 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x0000028442B27350>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 17:27:32 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'width\': 0.0035579082396566264, \'height\': 0.0035579082396566264, \'translate\': [0.0, 0.0, 0], \'zScale\': 1.0, \'grid\': {\'width\': 2, \'height\': 2, \'binary\': PyQt5.QtCore.QByteArray(b\'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\')}}';
+2022-12-06 17:27:32 runScript: loadEnd("LYRS")
+2022-12-06 17:27:45 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'scene\', \'properties\': {\'baseExtent\': {\'cx\': 113.72514972569044, \'cy\': 22.996534474393187, \'width\': 0.00444913969218419, \'height\': 0.00444913969218419, \'rotation\': 0}, \'origin\': {\'x\': 113.72514972569044, \'y\': 22.996534474393187, \'z\': 0.0}, \'zScale\': 1.0, \'light\': \'directional\'}}';
+2022-12-06 17:27:45 runScript: loadStart("LYRS", true)
+2022-12-06 17:27:45 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'layer\', \'id\': 2, \'properties\': {\'name\': \'Flat Plane\', \'clickable\': True, \'visible\': True, \'type\': \'dem\', \'clipped\': False, \'mtlNames\': [\'map (canvas)\'], \'mtlIdx\': 0}, \'data\': [], \'PROPERTIES\': {\'checkBox_Clickable\': True, \'checkBox_Frame\': False, \'checkBox_Sides\': False, \'checkBox_Tiles\': False, \'checkBox_Visible\': True, \'checkBox_Wireframe\': False, \'colorButton_Edge\': [0, 0, 0, 255], \'colorButton_Side\': [204, 187, 170, 255], \'colorButton_Wireframe\': [0, 0, 0, 255], \'lineEdit_Altitude\'';
+2022-12-06 17:27:45 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'materials\': [{\'type\': 0, \'image\': {\'object\': <PyQt5.QtGui.QImage object at 0x0000028442B272E0>}, \'ds\': 1, \'mtlIndex\': 0, \'useNow\': True}]}';
+2022-12-06 17:27:45 runScript: document.getElementById('debug').innerHTML = '{\'type\': \'block\', \'layer\': 2, \'block\': 0, \'width\': 0.00444913969218419, \'height\': 0.00444913969218419, \'translate\': [0.0, 0.0, 0], \'zScale\': 1.0, \'grid\': {\'width\': 2, \'height\': 2, \'binary\': PyQt5.QtCore.QByteArray(b\'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\')}}';
+2022-12-06 17:27:45 runScript: loadEnd("LYRS")
