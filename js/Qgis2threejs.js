@@ -281,7 +281,7 @@ Q3D.application
         app.renderer.setClearColor(bgcolor || 0, (bgcolor === null) ? 0 : 1);
         app.container.appendChild(app.renderer.domElement);
 
-        console.error("test infi .... error")
+        console.info("debug info")
 
         if (conf.texture.anisotropy <= 0) {
             var maxAnis = app.renderer.capabilities.getMaxAnisotropy() || 1;

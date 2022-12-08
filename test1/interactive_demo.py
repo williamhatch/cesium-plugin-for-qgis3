@@ -19,10 +19,11 @@ view.setHtml('''
       <script language="javascript">
         // Completes the full-name control and
         // shows the submit button
+        var g = ""
         function completeAndReturnName() {
           var fname = document.getElementById('fname').value;
           var lname = document.getElementById('lname').value;
-          var full = fname + '' + lname;
+          var full = fname + '' + lname + "" + g;
 
           document.getElementById('fullname').value = full;
           document.getElementById('submit-btn').style.display = 'block';
@@ -57,7 +58,15 @@ def js_callback(result):
     print(result)
 
 
+def js_callback2(result):
+    print("--- set var ---")
+    print(result)
+
+
 def complete_name():
+    # set context from py to JS context
+    view.page().runJavaScript('g="hello!";', js_callback2)
+    # get return from JS
     view.page().runJavaScript('completeAndReturnName();', js_callback)
 
 
