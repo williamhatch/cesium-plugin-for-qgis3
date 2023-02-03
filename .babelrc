@@ -1,0 +1,14 @@
+// babel .\Cesium\Cesium.js -o .\Cesium\Cesium.2.js to conbert to es5
+
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": [],
+  "compact": false
+}
